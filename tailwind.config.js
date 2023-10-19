@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+       screens: {
+      'xxxs': '350px',
+  
+    },
       fontFamily: {
         'Lobster': ["Lobster", 'sans-serif'],
       },
