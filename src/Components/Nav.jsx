@@ -5,8 +5,8 @@ const Nav = () => {
     <nav  className=' mb-6'>
         <div className="  navbar bg-base-200 shadow-xl">
 
-  <div className="  flex-1">
-    <p className="btn btn-ghost normal-case text-xl  ">Myanmar  <span className= '  font-Lobster normal-case text-xl   text-red-500'>Ticketing </span>Service</p>
+  <div className="  block xxxs:flex-1">
+    <p className="btn btn-ghost normal-case md:text-xl  ">Myanmar  <span className= '  font-Lobster normal-case text-sm sm:text-lg md:text-xl    text-red-500'>Ticketing </span>Service</p>
     <p></p>
   </div>
   <div className="flex-none gap-2">
