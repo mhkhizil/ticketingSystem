@@ -7,7 +7,7 @@ const Cinema = () => {
   const cinemaList=dataFetching('Tbl_CinemaList');
   console.log(cinemaList);
   return (
-    <div className=' flex-col items-center'>
+    <div className=' flex-col items-center justify-center '>
      {cinemaList?.map((cl, index) => {
           return (
             <motion.div
@@ -18,7 +18,7 @@ const Cinema = () => {
                 y: 0,
                 transition: { duration: 0.5, delay: index * 0.2 },
               }}
-              className={`  `}
+              className={``}
             >
               <CinemaList cl={cl} />
             </motion.div>

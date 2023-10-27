@@ -1,15 +1,20 @@
-import React from 'react'
-import dataFetching from '../Data/dataFetching'
+import React from 'react';
+
+import {BiCurrentLocation} from "react-icons/bi";
 
 const CinemaList = ({cl}) => {
  
   return (
-    <div>
-      <div className=' flex items-center justify-center'>
-        <p>{cl?.CinemaName}</p>
-        <p>Location</p>
+    <>
+      <div className=' flex items-center  justify-evenly'>
+       <div>
+       <p>{cl?.CinemaName}</p>
+       </div>
+ <div>
+ <p><BiCurrentLocation/></p>
+ </div>
       </div>
-    </div>
+    </>
   )
 }
 
