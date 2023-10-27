@@ -10,7 +10,7 @@ const Path = () => {
       <Routes>
         <Route  path='/' element={<HomePage/>}>
         <Route index element={<Movies/>}/>
-        <Route path='/cinema' element={<Cinema/>}/>
+        <Route path='/cinema/:mid' element={<Cinema/>}/>
         </Route>
       </Routes>
     </div>

@@ -1,14 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const MovieCard = ({md}) => {
-  return (
-  < >
-<Link to={'/cinema'}>
-<img className=' w-[300px] h-[400px] rounded-xl' src={md?.moviePath} alt="" />
-</Link>
+  const [isHovered, setIsHovered] = useState(false);
 
-  </>
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  return (
+  <div    onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}  className=' hover:opacity-50 relative'>
+   {
+    isHovered && (
+    
+      <div className={`absolute inset-0 flex items-center justify-center `}>
+          <Link to={`/cinema/:${md?.MovieId}`}>
+      <button className="bg-red-500 text-white p-2 rounded-xl  ">Book Cinema</button>
+      </Link>
+    </div>
+
+    )
+   }
+
+<img className=' w-[300px] h-[400px] rounded-xl' src={md?.moviePath} alt="" />
+
+<p className=' bg-red-700 rounded-full px-2  text-white absolute  bottom-[20px] left-[20px]'>{md?.Duration}</p>
+<p className=' bg-red-700 rounded-full px-2  text-white absolute  bottom-[20px] right-[20px]'>{md?.ReleaseDate?.split("T")[0]}</p>
+
+
+
+  </div>
   )
 }
 
