@@ -4,9 +4,10 @@ import MovieCard from "../Components/MovieCard";
 import { useDispatch, useSelector } from "react-redux";
 import { movieLists } from "../Services/dataSlice";
 import { motion } from "framer-motion";
+import Pagination from "../Components/pagination";
 
 const Movies = () => {
-  const movieData = dataFetching();
+  const movieData = dataFetching('Tbl_MovieList');
   const [divHover, setDivHover] = useState(false);
   
 //   console.log(divHover);
@@ -46,7 +47,13 @@ const Movies = () => {
             </motion.div>
           );
         })}
+        
       </div>
+      <div className=" text-center my-10">
+      <Pagination/>
+      </div>
+    
+   
     </div>
   );
 };
