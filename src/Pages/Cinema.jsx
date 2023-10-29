@@ -7,7 +7,8 @@ const Cinema = () => {
   const cinemaList=dataFetching('Tbl_CinemaList');
   console.log(cinemaList);
   return (
-    <div className=' flex-col items-center justify-center '>
+    <div className=' flex-col items-center justify-between  '>
+    
      {cinemaList?.map((cl, index) => {
           return (
             <motion.div
@@ -24,6 +25,7 @@ const Cinema = () => {
             </motion.div>
           );
         })}
+
     </div>
   )
 }
