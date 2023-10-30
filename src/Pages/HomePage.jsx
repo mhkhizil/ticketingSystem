@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from '../Components/Nav'
-import dataFetching from '../Data/dataFetching'
+
+import { Outlet } from 'react-router-dom';
 
 const HomePage = () => {
-  dataFetching();
+ 
+//   console.log(updatedBrands);
+//  useEffect(()=>{
+//     dispatch(movieLists(movieData))
+//  },[]);
+//  console.log(movieData);
   return (
     <div>
         <Nav/>
-  This is home
+        <Outlet/>
+
+
     </div>
   )
 }
