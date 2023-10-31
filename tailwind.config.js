@@ -9,6 +9,7 @@ export default {
     extend: {
        screens: {
       'xxxs': '350px',
+      'xxss':'500px'
   
     },
       fontFamily: {
