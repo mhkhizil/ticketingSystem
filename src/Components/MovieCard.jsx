@@ -18,7 +18,7 @@ const MovieCard = ({md}) => {
     isHovered && (
     
       <div className={`absolute inset-0 flex items-center justify-center `}>
-          <Link to={`/cinema/:${md?.MovieId}`}>
+          <Link to={`/cinema/${md?.MovieId}`}>
       <button className="bg-red-500 text-white p-2 rounded-xl  ">Book Cinema</button>
       </Link>
     </div>

@@ -1,0 +1,1 @@
+cinema ko onClick lite yin cinema id nk movie id nk room id(Cinema1,2,3...)  ko nout compo ko py p mha click htr dl movie yk id yl click htr dl cinema yk id yl click htr dl room yk id yl   pr dl schedule ko htote pya 
