@@ -10,7 +10,7 @@ const fetching=await fetch('https://raw.githubusercontent.com/sannlynnhtun-codin
 const jsonData=await fetching.json();
 
 setData(jsonData?.[dataKey]);
-console.log(jsonData);
+// console.log(jsonData);
     };
     useEffect(()=>{
         dataFetch();
