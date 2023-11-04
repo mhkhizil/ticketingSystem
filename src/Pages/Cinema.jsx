@@ -2,18 +2,25 @@ import React, { useEffect, useState } from 'react'
 import CinemaList from '../Components/CinemaList'
 import { motion } from "framer-motion";
 import dataFetching from '../Data/dataFetching';
+import { Outlet, useParams } from 'react-router-dom';
 
 const Cinema = () => {
+  const mid=useParams();
+
   const cinemaList=dataFetching('Tbl_CinemaList');
   const cRomm=dataFetching('Tbl_CinemaRoom');
-//  console.log(cinemaList); 
+//  console.log(cRomm); 
   const [roomNames, setRoomNames] = useState({});//store room name 
 
   useEffect(() => {
     // Define a function to fetch room names based on CinemaId
     const fetchRoomNames = (cinemaId) => {
       const filteredRoomNames = cRomm?.filter(room => room.CinemaId === cinemaId) //filtering to get objects that have same cinemaID(will made new array with object that have same cinemaID)
-        ?.map(room => room.RoomName);//Remap above filtered array to get only room names array 
+        ?.map(room => ({
+          RoomId: room.RoomId,
+          RoomName: room.RoomName,
+        })); 
+      //  console.log(filteredRoomNames);//Remap above filtered array to get only room names array 
       setRoomNames((prevRoomNames) => ({
         ...prevRoomNames,
         [cinemaId]: filteredRoomNames,
@@ -25,10 +32,10 @@ const Cinema = () => {
       fetchRoomNames(cl.CinemaId);
     });
   }, [cinemaList]);
-  console.log(roomNames);
+  // console.log(roomNames);
   return (
     <div className=' flex-col items-center justify-center  '>
-    
+    <Outlet/>
      {cinemaList?.map((cl, index) => {
           return (
             <motion.div
@@ -43,10 +50,11 @@ const Cinema = () => {
               whileHover={{ scale: 1.1 }}
               className={` m-24 border border-red-500 rounded-xl p-4 shadow-xl` }
             >
-              <CinemaList cl={cl} roomNames={roomNames[cl.CinemaId] || []} />
+              <CinemaList cRomm={cRomm}  mid={mid} cl={cl} roomNames={roomNames[cl.CinemaId] || []} />
             </motion.div>
           );
         })}
+           
 
     </div>
   )
