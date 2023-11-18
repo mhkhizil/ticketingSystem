@@ -7,10 +7,13 @@ const dataFetching = (dataKey) => {
     const [data, setData] = useState(null);
     const dataFetch=async ()=>{
 const fetching=await fetch('https://raw.githubusercontent.com/sannlynnhtun-coding/Movie-Ticket-Online-Booking-System/main/MovieTicketOnlineBookingSystem.json');
-const jsonData=await fetching.json();
 
-setData(jsonData?.[dataKey]);
-// console.log(jsonData);
+const jsonData=await fetching.json();
+if (jsonData?.[dataKey]!==data) {
+    setData(jsonData?.[dataKey]);
+}
+
+// console.log(jsonData?.[dataKey]);
     };
     useEffect(()=>{
         dataFetch();

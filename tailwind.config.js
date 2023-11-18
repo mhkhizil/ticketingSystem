@@ -15,6 +15,9 @@ export default {
       fontFamily: {
         'Lobster': ["Lobster", 'sans-serif'],
       },
+      boxShadow: {
+        'spec': '0 3px 10px rgba(255, 255, 255, 0.7)',
+      }
     },
   },
   plugins: [require("daisyui")],
