@@ -1,30 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style.css";
 import dataFetching from "../Data/dataFetching";
 import { useParams } from "react-router-dom";
 
 const SeatChoosing = () => {
+  const[isSelected,setIsSelected]=useState(false);
   const {id}=useParams();
   console.log(id);
   const fetchingSetaNumbers=dataFetching("Tbl_RoomSeat");
 
   const seatForRoom=fetchingSetaNumbers?.filter((m)=>m.RoomId===parseInt(id));
+  function chunkArray(array, chunkSize) {
+    var result = [];
+    for (var i = 0; i < array?.length; i += chunkSize) {
+        result.push(array.slice(i, i + chunkSize));
+    }
+    return result;
+};
+var chunkedArray = chunkArray(seatForRoom, 20);
+// console.log(chunkedArray[0][0]);
   console.log(seatForRoom?.map((m)=>m));
   return (
-    <div className=" w-[100%] flex-col items-center justify-center ">
-      <div className="  my-16 flex items-center justify-center">
-        <div className=" bg-white w-[800px] h-[100px]  shadow-spec"></div>
-      </div>
-      <div>
-    <div className=" px-72 flex  flex-wrap items-center justify-around">
+    <div className=" w-[100%] flex flex-col items-center justify-center ">
+     
+        <div className=" my-6 bg-white w-[80%]  h-[100px]  shadow-spec"></div>
+      
+      <div className="w-[80%] ">
+  <div>
     {
-      seatForRoom?.map((m)=>{
+      chunkedArray?.map((c,i)=>{
         return(
-          <p className="p-1 m-2 border w-[30px]">{m?.SeatNo}</p>
+          <div className="  flex items-center justify-center">
+   
+            {
+              
+              c?.map((s)=>{
+
+                return(
+                  <p onClick={()=> setIsSelected(!isSelected)}  className={`${isSelected?"bg-red-500":""} rounded-lg hover:bg-red-500 cursor-pointer m-1 text-center border border-r-white sm:text-sm  xxxs:text-xxs xxss:w-3 sm:w-6 md:w-12`}>{s?.SeatNo}</p>
+                )
+              })
+            }
+          </div>
         )
       })
     }
-    </div>
+  </div>
         {/* row */}
         {/* <div className=" flex items-center justify-around">
           <div className=" flex ">
