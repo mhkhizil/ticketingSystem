@@ -4,12 +4,14 @@ import dataFetching from "../Data/dataFetching";
 import { useParams } from "react-router-dom";
 
 const SeatChoosing = () => {
-  const[isSelected,setIsSelected]=useState(false);
+  const[selected,setSelected]=useState([]);
   const {id}=useParams();
-  console.log(id);
+  console.log(selected);
+  // console.log(id);
   const fetchingSetaNumbers=dataFetching("Tbl_RoomSeat");
 
   const seatForRoom=fetchingSetaNumbers?.filter((m)=>m.RoomId===parseInt(id));
+  // console.log(seatForRoom);
   function chunkArray(array, chunkSize) {
     var result = [];
     for (var i = 0; i < array?.length; i += chunkSize) {
@@ -17,9 +19,9 @@ const SeatChoosing = () => {
     }
     return result;
 };
-var chunkedArray = chunkArray(seatForRoom, 20);
+var chunkedArray = chunkArray(seatForRoom, 20);/// to get each row as a small  array within in the big array 
 // console.log(chunkedArray[0][0]);
-  console.log(seatForRoom?.map((m)=>m));
+  // console.log(seatForRoom?.map((m)=>m));
   return (
     <div className=" w-[100%] flex flex-col items-center justify-center ">
      
@@ -30,14 +32,20 @@ var chunkedArray = chunkArray(seatForRoom, 20);
     {
       chunkedArray?.map((c,i)=>{
         return(
-          <div className="  flex items-center justify-center">
+          <div key={i+1} className="  flex items-center justify-center">
    
             {
               
-              c?.map((s)=>{
+              c?.map((s,a)=>{
+                // console.log(c);
 
                 return(
-                  <p onClick={()=> setIsSelected(!isSelected)}  className={`${isSelected?"bg-red-500":""} rounded-lg hover:bg-red-500 cursor-pointer m-1 text-center border border-r-white sm:text-sm  xxxs:text-xxs xxss:w-3 sm:w-6 md:w-12`}>{s?.SeatNo}</p>
+                  <p key={s?.SeatId} onClick={()=> {
+                        setSelected(prevState=>([
+                          ...prevState,
+                          s?.SeatId
+                        ]))
+                  }}  className={`${selected.includes(s?.SeatId) ? 'bg-red-500':''} rounded-lg hover:bg-red-500 cursor-pointer m-1 text-center border border-r-white sm:text-sm  xxxs:text-xxs xxss:w-3 sm:w-6 md:w-12`}>{s?.SeatNo}</p>
                 )
               })
             }
