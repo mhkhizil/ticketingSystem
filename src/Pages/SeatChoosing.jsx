@@ -34,7 +34,7 @@ const SeatChoosing = () => {
             return (
               <div key={i + 1} className="  flex items-center justify-center">
                 {c?.map((s, a) => {
-                  console.log(s);
+                  // console.log(s);
 
                   return (
                     <p
@@ -52,17 +52,10 @@ const SeatChoosing = () => {
                       }}
                       className={`${
                         selected.includes(s?.SeatId) &&
-                        (s?.RowName === "A" ||
-                          s?.RowName === "B" ||
-                          s?.RowName === "C" ||
-                          s?.RowName === "D" ||
-                          s?.RowName === "E" ||
-                          s?.RowName === "F" ||
-                          s?.RowName === "G" ||
-                          s?.RowName === "H")
+                      s?.SeatType==="single"
                           ? "bg-red-500"
-                          : selected.includes(s?.SeatId) &&
-                            (s?.RowName === "I" ? "bg-blue-700" : "")
+                          : selected.includes(s?.SeatId) &&s?.SeatType==="couple"?'bg-blue-700':''
+                           
                       } rounded-lg hover:bg-red-500 cursor-pointer m-1 text-center border border-r-white sm:text-sm  xxxs:text-xxs xxss:w-3 sm:w-6 md:w-12`}
                     >
                       {s?.SeatNo}
@@ -100,6 +93,20 @@ const SeatChoosing = () => {
     <p>18</p>
     </div>
         </div> */}
+      </div>
+      <div className=" flex  items-center justify-center">
+       <div className=" flex items-center justify-around">
+        <div className=" w-10 h-5 bg-red-500 rounded-2xl"></div>
+        <p className="mx-2"> Single</p>
+       </div>
+       <div className=" flex items-center justify-around">
+        <div className=" w-10 h-5 bg-blue-700 rounded-2xl"></div>
+        <p className="mx-2"> Couple</p>
+       </div>
+      </div>
+      <div className=" flex items-center justify-center">
+        <p>Selected seats:</p>
+      
       </div>
     </div>
   );
