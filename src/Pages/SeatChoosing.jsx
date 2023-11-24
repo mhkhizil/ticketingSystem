@@ -4,56 +4,75 @@ import dataFetching from "../Data/dataFetching";
 import { useParams } from "react-router-dom";
 
 const SeatChoosing = () => {
-  const[selected,setSelected]=useState([]);
-  const {id}=useParams();
+  const [selected, setSelected] = useState([]);
+  const { id } = useParams();
   console.log(selected);
   // console.log(id);
-  const fetchingSetaNumbers=dataFetching("Tbl_RoomSeat");
+  const fetchingSetaNumbers = dataFetching("Tbl_RoomSeat");
 
-  const seatForRoom=fetchingSetaNumbers?.filter((m)=>m.RoomId===parseInt(id));
+  const seatForRoom = fetchingSetaNumbers?.filter(
+    (m) => m.RoomId === parseInt(id)
+  );
   // console.log(seatForRoom);
   function chunkArray(array, chunkSize) {
     var result = [];
     for (var i = 0; i < array?.length; i += chunkSize) {
-        result.push(array.slice(i, i + chunkSize));
+      result.push(array.slice(i, i + chunkSize));
     }
     return result;
-};
-var chunkedArray = chunkArray(seatForRoom, 20);/// to get each row as a small  array within in the big array 
-// console.log(chunkedArray[0][0]);
+  }
+  var chunkedArray = chunkArray(seatForRoom, 20); /// to get each row as a small  array within in the big array
+  // console.log(chunkedArray);
   // console.log(seatForRoom?.map((m)=>m));
   return (
     <div className=" w-[100%] flex flex-col items-center justify-center ">
-     
-        <div className=" my-6 bg-white w-[80%]  h-[100px]  shadow-spec"></div>
-      
-      <div className="w-[80%] ">
-  <div>
-    {
-      chunkedArray?.map((c,i)=>{
-        return(
-          <div key={i+1} className="  flex items-center justify-center">
-   
-            {
-              
-              c?.map((s,a)=>{
-                // console.log(c);
+      <div className=" my-6 bg-white w-[80%]  h-[100px]  shadow-spec"></div>
 
-                return(
-                  <p key={s?.SeatId} onClick={()=> {
-                        setSelected(prevState=>([
-                          ...prevState,
-                          s?.SeatId
-                        ]))
-                  }}  className={`${selected.includes(s?.SeatId) ? 'bg-red-500':''} rounded-lg hover:bg-red-500 cursor-pointer m-1 text-center border border-r-white sm:text-sm  xxxs:text-xxs xxss:w-3 sm:w-6 md:w-12`}>{s?.SeatNo}</p>
-                )
-              })
-            }
-          </div>
-        )
-      })
-    }
-  </div>
+      <div className="w-[80%] ">
+        <div>
+          {chunkedArray?.map((c, i) => {
+            return (
+              <div key={i + 1} className="  flex items-center justify-center">
+                {c?.map((s, a) => {
+                  console.log(s);
+
+                  return (
+                    <p
+                      key={s?.SeatId}
+                      onClick={() => {
+                        setSelected((prevState) => {
+                          if (prevState.includes(s?.SeatId)) {
+                            // Remove the SeatId if it's already present
+                            return prevState.filter((id) => id !== s?.SeatId);
+                          } else {
+                            // Add the SeatId if it's not present
+                            return [...prevState, s?.SeatId];
+                          }
+                        });
+                      }}
+                      className={`${
+                        selected.includes(s?.SeatId) &&
+                        (s?.RowName === "A" ||
+                          s?.RowName === "B" ||
+                          s?.RowName === "C" ||
+                          s?.RowName === "D" ||
+                          s?.RowName === "E" ||
+                          s?.RowName === "F" ||
+                          s?.RowName === "G" ||
+                          s?.RowName === "H")
+                          ? "bg-red-500"
+                          : selected.includes(s?.SeatId) &&
+                            (s?.RowName === "I" ? "bg-blue-700" : "")
+                      } rounded-lg hover:bg-red-500 cursor-pointer m-1 text-center border border-r-white sm:text-sm  xxxs:text-xxs xxss:w-3 sm:w-6 md:w-12`}
+                    >
+                      {s?.SeatNo}
+                    </p>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
         {/* row */}
         {/* <div className=" flex items-center justify-around">
           <div className=" flex ">
