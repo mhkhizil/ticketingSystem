@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import dataFetching from "../Data/dataFetching";
 import MovieCard from "../Components/MovieCard";
-import { useDispatch, useSelector } from "react-redux";
-import { movieLists } from "../Services/dataSlice";
+import { useDispatch} from "react-redux";
+
 import { motion } from "framer-motion";
 import Pagination from "../Components/pagination";
 
