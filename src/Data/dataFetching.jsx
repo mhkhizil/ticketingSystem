@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { movieLists } from '../Services/dataSlice';
+
+
 
 const dataFetching = (dataKey) => {
     // const dispatch=useDispatch();

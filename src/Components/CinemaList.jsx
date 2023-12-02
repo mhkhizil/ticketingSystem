@@ -2,7 +2,7 @@ import React from "react";
 
 import { BiCurrentLocation } from "react-icons/bi";
 import dataFetching from "../Data/dataFetching";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate} from "react-router-dom";
 
 const CinemaList = ({ cl, roomNames, mid }) => {
 
