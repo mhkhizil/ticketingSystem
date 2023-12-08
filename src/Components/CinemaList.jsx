@@ -2,13 +2,16 @@ import React from "react";
 
 import { BiCurrentLocation } from "react-icons/bi";
 import dataFetching from "../Data/dataFetching";
-import {  useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addCinema, addRoom } from "../Services/dataSlice";
 
 const CinemaList = ({ cl, roomNames, mid }) => {
-
+  const dispatch = useDispatch();
   // console.log(roomNames);
   //movie id por mu t p room id ko tite sit
   const cinemaRoom = dataFetching("Tbl_CinemaRoom");
+  console.log(useSelector((state) => state.dataReducer));
   const nav = useNavigate();
   // console.log(cl);
   // console.log(cinemaRoom);
@@ -35,21 +38,32 @@ const CinemaList = ({ cl, roomNames, mid }) => {
         </div>
 
         <div className=" cursor-pointer ">
-          {roomNames?.map((r, i) => (
-            <p
-              onClick={() => {
-                nav(
-                  `/cinema/${mid?.mid}/scheduling/${cl?.CinemaId}/${r?.RoomId}`
-                );
-                document.getElementById('my_modal_1').showModal()
-              }}
-              key={i + 1}
-              className="bg-red-500 rounded-xl block  xxss:inline-flex text-white p-2 m-2 xxxs:text-sm sm:text-xl hover:opacity-60"
-            >
-              {r?.RoomName}
-            </p>
-          ))}
-   
+          {roomNames?.map((r, i) => {
+            return (
+              <p
+                onClick={() => {
+                  dispatch(
+                    addRoom({
+                      room: r?.RoomName
+                    })
+                  );
+                  nav(
+                    `/cinema/${mid?.mid}/scheduling/${cl?.CinemaId}/${r?.RoomId}`
+                  );
+                  dispatch(
+                    addCinema({
+                      cinema: cl?.CinemaName,
+                    })
+                  );
+                  document.getElementById("my_modal_1").showModal();
+                }}
+                key={i + 1}
+                className="bg-red-500 rounded-xl block  xxss:inline-flex text-white p-2 m-2 xxxs:text-sm sm:text-xl hover:opacity-60"
+              >
+                {r?.RoomName}
+              </p>
+            );
+          })}
         </div>
       </div>
     </>

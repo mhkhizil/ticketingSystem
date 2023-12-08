@@ -11,7 +11,7 @@ const Movies = () => {
   const [divHover, setDivHover] = useState(false);
   
 //   console.log(divHover);
-  const dispatch = useDispatch();
+
   const moviePath = [
     "https://sportshub.cbsistatic.com/i/2023/07/06/928234b4-1059-4965-8dfd-adfdbdae0864/the-nun-ii-2-poster.jpg?auto=webp&width=1200&height=1500&crop=0.8:1,smart",
     "https://i.redd.it/mo8q8wopu3711.jpg",
@@ -32,6 +32,7 @@ const Movies = () => {
     <div>
       <div className="  flex-wrap flex items-center justify-center gap-8">
         {updatedMovieLists?.map((md, index) => {
+     
           return (
             <motion.div
               key={md?.MovieId}
