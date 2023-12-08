@@ -3,12 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import dataFetching from "../Data/dataFetching";
 import { data } from "autoprefixer";
 import { useScroll } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { addShowDate, addShowTime } from "../Services/dataSlice";
 
 const Scheduling = () => {
+  const dispatch=useDispatch();
+
   const nav = useNavigate();
   const [selectedTime, setSelectedTime] = useState(null);
   const params = useParams();
-
   const seperateDT = [];
   const fetchingMovieShowDateId = dataFetching("Tbl_MovieShowDate");
   const finalShowDataFetching = dataFetching("Tbl_MovieSchedule");
@@ -27,8 +30,9 @@ const Scheduling = () => {
       date: d?.ShowDateTime?.split("T")[0],
     })
   );
-
+console.log(seperateDT);
   const [singleDate] = seperateDT;
+  console.log(singleDate);
 
   //   const finalShowDate=
   //   console.log(dateArr?.map((da)=>da?.ShowDateId));
@@ -75,7 +79,15 @@ const Scheduling = () => {
               </details>
               <button
                 onClick={() => {
+                  dispatch(
+                    addShowDate({
+                      showDate:singleDate?.date
+                    })
+                  )
                   nav(`/seating/${params?.rid}`);
+                  dispatch(addShowTime({
+                    showTime:selectedTime
+                  }))
                 }}
                 disabled={selectedTime === null}
                 className=" rounded-xl  m-1 btn  bg-red-600"

@@ -39,6 +39,7 @@ export const {
   addMovieName,
   addCinema,
   addRoom,
+  addShowDate,
   addShowTime,
   addSelectedSeat,
 } = dataSlice.actions;

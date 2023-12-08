@@ -11,7 +11,7 @@ const CinemaList = ({ cl, roomNames, mid }) => {
   // console.log(roomNames);
   //movie id por mu t p room id ko tite sit
   const cinemaRoom = dataFetching("Tbl_CinemaRoom");
-  console.log(useSelector((state) => state.dataReducer));
+
   const nav = useNavigate();
   // console.log(cl);
   // console.log(cinemaRoom);
