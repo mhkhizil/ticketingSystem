@@ -5,8 +5,10 @@ import Cinema from '../Pages/Cinema'
 import Movies from '../Pages/Movies'
 import Scheduling from '../Pages/Scheduling'
 import SeatChoosing from '../Pages/SeatChoosing'
+import CheckOut from '../Pages/CheckOut'
 
 const Path = () => {
+
   return (
     <div>
       <Routes>
@@ -16,6 +18,7 @@ const Path = () => {
           <Route path='/cinema/:mid/scheduling/:cid/:rid' element={<Scheduling/>}/>
         </Route>
         <Route path='/seating/:id' element={<SeatChoosing/>}/>
+        <Route path='/checkout' element={<CheckOut/>}/>
         </Route>
       </Routes>
     </div>

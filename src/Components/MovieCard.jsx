@@ -8,16 +8,17 @@ const MovieCard = ({ md }) => {
   const nav = useNavigate();
 
   const dispatch = useDispatch();
-  const handleClick = (md) => {
-    dispatch(addMovieName({ movie: md?.MovieTitle }));
-    nav(`/cinema/${md?.MovieId}`);
-  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+  const handleClick = (md) => {
+    dispatch(addMovieName({ movie: md?.MovieTitle }));
+    nav(`/cinema/${md?.MovieId}`);
   };
   return (
     <div
@@ -28,7 +29,7 @@ const MovieCard = ({ md }) => {
       {isHovered && (
         <div className={`absolute inset-0 flex items-center justify-center `}>
           <button
-            onClick={handleClick(md)}
+            onClick={()=>handleClick(md)}
             className="bg-red-500 text-white p-2 rounded-xl  "
           >
             Book Cinema

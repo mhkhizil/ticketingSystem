@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
 import dataFetching from "../Data/dataFetching";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addSelectedSeat } from "../Services/dataSlice";
 
 const SeatChoosing = () => {
+  const dispatch = useDispatch();
+  const nav=useNavigate();
   console.log(useSelector((state) => state.dataReducer));
   const [selected, setSelected] = useState([]);
   const { id } = useParams();
@@ -30,10 +33,10 @@ const SeatChoosing = () => {
   var chunkedArray = chunkArray(seatForRoom, 20); /// to get each row as a small  array within in the big array
   // console.log(chunkedArray);
   // console.log(seatForRoom?.map((m)=>m));
-  const seatNoLooping=seatForRoom?.filter(se=>selected.includes(se?.SeatId) );
-  console.log( seatNoLooping);
-
-
+  const seatNoLooping = seatForRoom?.filter((se) =>
+    selected.includes(se?.SeatId)
+  );
+  // console.log(seatNoLooping);
 
   return (
     <div className=" w-[100%] flex flex-col items-center justify-center ">
@@ -60,7 +63,6 @@ const SeatChoosing = () => {
                         key={s?.SeatId}
                         onClick={() => {
                           setSelected((prevState) => {
-                         
                             if (prevState.includes(s?.SeatId)) {
                               // Remove the SeatId if it's already present
                               return prevState.filter((id) => id !== s?.SeatId);
@@ -101,15 +103,29 @@ const SeatChoosing = () => {
         </div>
       </div>
       <div className=" flex items-center justify-center">
-       {seatNoLooping?.length !=0? <p>Selected seats:</p> : ''}
+        {seatNoLooping?.length != 0 ? <p>Selected seats:</p> : ""}
         {seatNoLooping?.map((seat) => {
-     
-        return(
-        <p>{seat?.SeatNo},</p>
-        )
+          return <p>{seat?.SeatNo},</p>;
         })}
       </div>
-      {seatNoLooping?.length !=0? <button className=" text-white my-4 text-end btn glass">Check out</button> : ''}
+      {seatNoLooping?.length != 0 ? (
+        <button
+          onClick={() => {
+            dispatch(
+              addSelectedSeat({
+                selectedSeat: seatNoLooping,
+              })
+            );
+            nav('/checkout');
+
+          }}
+          className=" bg-red-700 text-white my-4 text-end btn glass"
+        >
+          Check out
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
