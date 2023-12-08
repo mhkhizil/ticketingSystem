@@ -3,12 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import dataFetching from "../Data/dataFetching";
 import { data } from "autoprefixer";
 import { useScroll } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { addShowDate, addShowTime } from "../Services/dataSlice";
 
 const Scheduling = () => {
-  const nav=useNavigate();
+  const dispatch=useDispatch();
+
+  const nav = useNavigate();
   const [selectedTime, setSelectedTime] = useState(null);
   const params = useParams();
-
   const seperateDT = [];
   const fetchingMovieShowDateId = dataFetching("Tbl_MovieShowDate");
   const finalShowDataFetching = dataFetching("Tbl_MovieSchedule");
@@ -27,8 +30,9 @@ const Scheduling = () => {
       date: d?.ShowDateTime?.split("T")[0],
     })
   );
-  console.log(seperateDT);
+console.log(seperateDT);
   const [singleDate] = seperateDT;
+  console.log(singleDate);
 
   //   const finalShowDate=
   //   console.log(dateArr?.map((da)=>da?.ShowDateId));
@@ -49,35 +53,48 @@ const Scheduling = () => {
           <h1 className=" font-bold text-lg text-center text-red-500">
             {singleDate?.date}
           </h1>
-          <div >
-           <div className=" my-2 w-full flex justify-center">
-           <details className="dropdown  ">
-              <summary className="m-1 btn  ">Select Time</summary>
-              <ul className={ ` shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52`}>
-                {seperateDT?.map((fd, i) => {
-                  return (
-                    <li
-                    
-                      key={i + 1}
-                      onClick={() => {
-                        setSelectedTime(fd?.time);
-                      }}
-                      className={`${fd?.time === selectedTime ?"text-red-600":""}`}
-                   
-                    >
-                      <a>{fd?.time}</a>
-                    </li>
-                  );
-                })}
-              
-              </ul>
-              
-            </details>
-            <button onClick={()=>{
-nav(`/seating/${params?.rid}`)
-            }}     disabled={selectedTime === null} className=" rounded-xl  m-1 btn  bg-red-600">Choose Seat</button>
-           </div>
-            
+          <div>
+            <div className=" my-2 w-full flex justify-center">
+              <details className="dropdown  ">
+                <summary className="m-1 btn  ">Select Time</summary>
+                <ul
+                  className={` shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52`}
+                >
+                  {seperateDT?.map((fd, i) => {
+                    return (
+                      <li
+                        key={i + 1}
+                        onClick={() => {
+                          setSelectedTime(fd?.time);
+                        }}
+                        className={`${
+                          fd?.time === selectedTime ? "text-red-600" : ""
+                        }`}
+                      >
+                        <a>{fd?.time}</a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </details>
+              <button
+                onClick={() => {
+                  dispatch(
+                    addShowDate({
+                      showDate:singleDate?.date
+                    })
+                  )
+                  nav(`/seating/${params?.rid}`);
+                  dispatch(addShowTime({
+                    showTime:selectedTime
+                  }))
+                }}
+                disabled={selectedTime === null}
+                className=" rounded-xl  m-1 btn  bg-red-600"
+              >
+                Choose Seat
+              </button>
+            </div>
           </div>
         </div>
       </dialog>

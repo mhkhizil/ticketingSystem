@@ -2,8 +2,10 @@ import React, { useState } from "react";
 
 import dataFetching from "../Data/dataFetching";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SeatChoosing = () => {
+  console.log(useSelector((state) => state.dataReducer));
   const [selected, setSelected] = useState([]);
   const { id } = useParams();
   // console.log(selected);
