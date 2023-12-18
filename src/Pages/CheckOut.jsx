@@ -56,5 +56,5 @@ const CheckOut = () => {
 };
 //reload lk yin hoem route ko pyn yt ag lk alert box pya p 
 //route guard htl
-// cinmea choosing ko pyin
+// cinmea choosing ko pyinnpm run
 export default CheckOut;

@@ -9,7 +9,7 @@ import Pagination from "../Components/pagination";
 const Movies = () => {
   const movieData = dataFetching('Tbl_MovieList');
   const [divHover, setDivHover] = useState(false);
-  
+  console.log(movieData);
 //   console.log(divHover);
 
   const moviePath = [
