@@ -2,16 +2,31 @@ import React from "react";
 
 import { BiCurrentLocation } from "react-icons/bi";
 import dataFetching from "../Data/dataFetching";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCinema, addRoom } from "../Services/dataSlice";
 
 const CinemaList = ({ cl, roomNames, mid }) => {
   const dispatch = useDispatch();
-  // console.log(roomNames);
-  //movie id por mu t p room id ko tite sit
-  const cinemaRoom = dataFetching("Tbl_CinemaRoom");
+  const data =useParams();
 
+
+  //movie id por mu t p room id ko tite sit
+  const sd = dataFetching("Tbl_MovieShowDate");
+  //  console.log(roomNames);
+ const testingFiletr=sd?.filter(s=>(
+  s?.MovieId ==data?.mid && s?.CinemaId ==cl?.CinemaId
+ ));
+ console.log(testingFiletr);
+ const requiredRoomId=testingFiletr?.map(id=>id?.RoomId);
+  console.log(requiredRoomId);
+ const finalRoomName=roomNames?.filter((rd)=>requiredRoomId?.includes(rd?.RoomId));
+ console.log(finalRoomName);
+//  console.log(testingFiletr);
+
+
+//  console.log(testingFiletr);
+//  console.log(testingFiletr);
   const nav = useNavigate();
   // console.log(cl);
   // console.log(cinemaRoom);
@@ -38,7 +53,8 @@ const CinemaList = ({ cl, roomNames, mid }) => {
         </div>
 
         <div className=" cursor-pointer ">
-          {roomNames?.map((r, i) => {
+          {finalRoomName?.map((r, i) => {
+         
             return (
               <p
                 onClick={() => {
