@@ -1,26 +1,18 @@
 import React, { useState } from "react";
 import dataFetching from "../Data/dataFetching";
 import MovieCard from "../Components/MovieCard";
-import { useDispatch, useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 import { motion } from "framer-motion";
 import Pagination from "../Components/pagination";
 
 const Movies = () => {
-
-
-
-
-
- 
-
-  const {filterMovie}=useSelector(state=>state);
+  const { filterMovie } = useSelector((state) => state);
 
   return (
     <div>
       <div className="  flex-wrap flex items-center justify-center gap-8">
         {filterMovie?.filteredMovie?.map((md, index) => {
-     
           return (
             <motion.div
               key={md?.MovieId}
@@ -36,13 +28,10 @@ const Movies = () => {
             </motion.div>
           );
         })}
-        
       </div>
       <div className=" text-center my-10">
-      <Pagination/>
+        <Pagination />
       </div>
-    
-   
     </div>
   );
 };

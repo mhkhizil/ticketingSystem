@@ -8,8 +8,6 @@ const Nav = () => {
   const [filterData, setFilterData] = useState("");
   const movieData = dataFetching("Tbl_MovieList");
   const dispatch = useDispatch();
-  
-
 
   //   console.log(divHover);
 
@@ -21,7 +19,7 @@ const Nav = () => {
     "https://m.media-amazon.com/images/M/MV5BNWZhZjUxZGUtMzM1OC00MjdmLWIzZjUtZTUzODc2ZTI2YzQzXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg",
     "https://www.themoviedb.org/t/p/original/u5kboZR4OMi4QdbOhawCZuzMVWJ.jpg",
     "https://m.media-amazon.com/images/M/MV5BMzI0NmVkMjEtYmY4MS00ZDMxLTlkZmEtMzU4MDQxYTMzMjU2XkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_FMjpg_UX1000_.jpg",
-    "https://pics.filmaffinity.com/Sound_of_Freedom-546775358-large.jpg",
+    "https://www.ecranlarge.com/media/cache/160x213/uploads/image/001/495/1qsbnxlvcfi7kuwxyu7bxjsrajp-538.jpg",
     "https://www.themoviedb.org/t/p/original/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
     "https://i.etsystatic.com/27062086/r/il/57b1ec/4371998749/il_fullxfull.4371998749_apux.jpg",
   ];
@@ -34,7 +32,6 @@ const Nav = () => {
       md?.MovieTitle.toLowerCase()?.includes(filterData)
     );
     dispatch(addfilteredMovie({ filteredMovie: searchResult }));
-    
   }, [filterData, dispatch, updatedMovieLists]);
   return (
     <nav className=" mb-6">
