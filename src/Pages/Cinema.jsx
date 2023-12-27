@@ -7,7 +7,7 @@ import { Outlet, useParams } from 'react-router-dom';
 const Cinema = () => {
   const mid=useParams();
   const cRomm=dataFetching('Tbl_CinemaRoom');
-  const cinemaList=dataFetching('Tbl_CinemaList');
+  const cinemaListOg=dataFetching('Tbl_CinemaList');
   const cinemaImg=[
     "https://elevenmyanmar.com/sites/news-eleven.com/files/news-images/dsc_7715mmk.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR76J122OzDeSCOgh97N_55Ox2IRLHivObcgA&usqp=CAU",
@@ -20,12 +20,12 @@ const Cinema = () => {
     "https://fastly.4sqi.net/img/general/600x600/13999881_VFwcusGdDvKTYPu3eaVl3PTo8PEhMYJCnYqM_-I3tMc.jpg",
     "https://elevenmyanmar.com/sites/news-eleven.com/files/news-images/dsc_7715mmk.jpg"
   ]
-  // const cinemaList=cinemaListOg?.map((cl,index)=>(
-  //     {
-  //       ...cl,
-  //       cinemaImg:cinemaImg[index % cinemaImg.length]
-  //     }
-  //   ))
+  const cinemaList=cinemaListOg?.map((cl,index)=>(
+      {
+        ...cl,
+        cinemaImg:cinemaImg[index % cinemaImg.length]
+      }
+    ))
  
   const sd = dataFetching("Tbl_MovieShowDate");
   // const cinemaIdFromScheduling=sd?.map(s=>s?.CinemaId);
@@ -55,7 +55,7 @@ const Cinema = () => {
     cinemaList?.forEach((cl) => {
       fetchRoomNames(cl.CinemaId);
     });
-  }, [cinemaList]);
+  }, [cinemaListOg]);
   console.log(cinemaList);
   const testingFiletr=sd?.filter(s=>(
     s?.MovieId ==mid?.mid 
@@ -67,7 +67,7 @@ const Cinema = () => {
 console.log(filteredCinemaList);
   // console.log(roomNames);
   return (
-    <div className=' flex-col items-center justify-center  '>
+    <div className=' flex flex-wrap items-center justify-center  '>
     <Outlet/>
      {filteredCinemaList?.map((cl, index) => {
           return (
@@ -81,7 +81,7 @@ console.log(filteredCinemaList);
                 
               }}
               whileHover={{ scale: 1.1 }}
-              className={` m-24 border border-red-500 rounded-xl p-4 shadow-xl` }
+              className={` m-24 border border-red-500 rounded-xl  shadow-xl` }
             >
               <CinemaList cRomm={cRomm}  mid={mid} cl={cl} roomNames={roomNames[cl.CinemaId] || []} />
             </motion.div>
