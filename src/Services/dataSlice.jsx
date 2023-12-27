@@ -7,6 +7,7 @@ const initialState = {
   showDate:null,
   showTime: null,
   selectedSeat: [],
+  totalSeatPrice:null
 };
 
 export const dataSlice = createSlice({
@@ -31,6 +32,9 @@ export const dataSlice = createSlice({
     addSelectedSeat: (state, { payload }) => {
       state.selectedSeat = payload.selectedSeat;
     },
+    addTotalSeatPrice: (state, { payload }) => {
+      state.totalSeatPrice = payload.totalSeatPrice;
+    },
   },
 });
 
@@ -42,6 +46,7 @@ export const {
   addShowDate,
   addShowTime,
   addSelectedSeat,
+  addTotalSeatPrice
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

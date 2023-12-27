@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import dataFetching from "../Data/dataFetching";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addSelectedSeat } from "../Services/dataSlice";
+import { addSelectedSeat, addTotalSeatPrice } from "../Services/dataSlice";
+import Swal from 'sweetalert2'
 
 const SeatChoosing = () => {
+ 
   const dispatch = useDispatch();
-  const nav=useNavigate();
-  console.log(useSelector((state) => state.dataReducer));
+  const nav = useNavigate();
+  const data = useSelector((state) => state.dataReducer);
   const [selected, setSelected] = useState([]);
   const { id } = useParams();
   // console.log(selected);
@@ -21,7 +23,7 @@ const SeatChoosing = () => {
   const seatForRoom = fetchingSetaNumbers?.filter(
     (m) => m.RoomId === parseInt(id)
   );
-  // console.log(seatPriceForRoom);
+  console.log(seatPriceForRoom);
   // console.log(seatForRoom);
   function chunkArray(array, chunkSize) {
     var result = [];
@@ -36,7 +38,18 @@ const SeatChoosing = () => {
   const seatNoLooping = seatForRoom?.filter((se) =>
     selected.includes(se?.SeatId)
   );
-  // console.log(seatNoLooping);
+  console.log(seatNoLooping);
+  //  console.log(seatPriceForRoom);
+  //  const finalSeatPrice=seatPriceForRoom?.filter(spr=>seatNoLooping?.some((seat) => seat.RowName === spr.RowName));
+  //  console.log(finalSeatPrice);
+
+  const totalPrice = seatNoLooping?.reduce((acc, seat) => {
+    const seatPrice = seatPriceForRoom.find(
+      (price) => price.RowName === seat.RowName
+    );
+    return acc + (seatPrice ? seatPrice.SeatPrice : 0);
+  }, 0);
+  console.log(totalPrice);
 
   return (
     <div className=" w-[100%] flex flex-col items-center justify-center ">
@@ -116,8 +129,83 @@ const SeatChoosing = () => {
                 selectedSeat: seatNoLooping,
               })
             );
-            nav('/checkout');
-
+            dispatch(
+              addTotalSeatPrice({
+                totalSeatPrice: totalPrice,
+              })
+            );
+            if (data?.movie === null) {
+              let timerInterval;
+              Swal.fire({
+                title: "Auto redirect alert!",
+                html: "you will be redirected to home page to choose movie in <b></b> milliseconds.",
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading();
+                  const timer = Swal.getPopup().querySelector("b");
+                  timerInterval = setInterval(() => {
+                    timer.textContent = `${Swal.getTimerLeft()}`;
+                  }, 100);
+                },
+                willClose: () => {
+                  clearInterval(timerInterval);
+                }
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  nav("/")
+                }
+              });
+            } else if (data?.cinema === null) {
+              let timerInterval;
+              Swal.fire({
+                title: "Auto redirect alert!",
+                html: "you will be redirected to home page to choose cinema in <b></b> milliseconds.",
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading();
+                  const timer = Swal.getPopup().querySelector("b");
+                  timerInterval = setInterval(() => {
+                    timer.textContent = `${Swal.getTimerLeft()}`;
+                  }, 100);
+                },
+                willClose: () => {
+                  clearInterval(timerInterval);
+                }
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  nav("/")
+                }
+              });
+            } else if (data?.showTime === null) {
+              let timerInterval;
+              Swal.fire({
+                title: "Auto redirect alert!",
+                html: "you will be redirected to home page to choose show time in <b></b> milliseconds.",
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading();
+                  const timer = Swal.getPopup().querySelector("b");
+                  timerInterval = setInterval(() => {
+                    timer.textContent = `${Swal.getTimerLeft()}`;
+                  }, 100);
+                },
+                willClose: () => {
+                  clearInterval(timerInterval);
+                }
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  nav("/")
+                }
+              });
+            } else {
+              nav("/checkout");
+            }
           }}
           className=" bg-red-700 text-white my-4 text-end btn glass"
         >
