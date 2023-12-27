@@ -1,3 +1,6 @@
+For live viewing of this web site go to -https://ticketing-system-dc8zpmcoz-mhkhizil.vercel.app/
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
