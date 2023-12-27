@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import PaymentForm from "./PaymentForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+//The loadStripe function is part of the @stripe/stripe-js library and is commonly used in React applications with the @stripe/react-stripe-js wrapper. Its primary purpose is to initialize the Stripe object with your publishable key and return the configured Stripe object.
 const stripePromise = loadStripe(
   "pk_test_51ORyHWEn6dwWwVwzUCbo9frDpScSBXt0cpBZKf19TNCoFpNXGenzzM7QUQO6HVMCQ7cntLSOcYnxSJPuzTU8jx6t00HWbekzgr"
 );
@@ -105,8 +106,9 @@ const CheckOut = () => {
       </div>
 
       {showPaymentForm && (
+        //In the context of Stripe integration with React, the Elements component is typically used to wrap the components that contain Stripe elements. It ensures that the necessary Stripe context is available to those components, allowing them to interact with the Stripe.js library and handle payment-related functionality.
+        //You create a stripePromise using loadStripe with your publishable key.You use the Elements component to wrap your component (MyCheckoutForm) that contains the Stripe elements.You pass the stripePromise to the stripe prop of the Elements component.By doing this, the Elements wrapper ensures that the stripe object is available to its child components. The child components can then use the useStripe and useElements hooks from @stripe/react-stripe-js to access the Stripe object and manage payment-related functionality. The Elements wrapper plays a crucial role in providing the necessary context for integrating Stripe elements into your React application.
         <Elements stripe={stripePromise}>
-   
           <PaymentForm />
         </Elements>
       )}
