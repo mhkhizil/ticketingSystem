@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
+import PaymentForm from "./PaymentForm";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe(
+  "pk_test_51ORyHWEn6dwWwVwzUCbo9frDpScSBXt0cpBZKf19TNCoFpNXGenzzM7QUQO6HVMCQ7cntLSOcYnxSJPuzTU8jx6t00HWbekzgr"
+);
 const CheckOut = () => {
   const data = useSelector((state) => state.dataReducer);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
   console.log(data);
   return (
     //    <div className=" w-full flex items-center justify-center">
@@ -42,7 +49,7 @@ const CheckOut = () => {
     //          </div>
     //       </div>
     //    </div>
-    // 
+    //
     //    </div>
 
     //  </div>
@@ -86,9 +93,23 @@ const CheckOut = () => {
         </tbody>
       </table>
       <div className=" flex items-center justify-center">
-         <button className=" text-white my-4  mx-4 text-end btn glass btn-wide bg-red-700">Book Now</button>
-         <button className=" text-white my-4 mx-4 text-end btn glass btn-wide bg-red-700">Buy Now</button>
-       </div>
+        <button className=" text-white my-4  mx-4 text-end btn glass btn-wide bg-red-700">
+          Book Now
+        </button>
+        <button
+          className=" text-white my-4 mx-4 text-end btn glass btn-wide bg-red-700"
+          onClick={() => setShowPaymentForm(true)}
+        >
+          Buy Now
+        </button>
+      </div>
+
+      {showPaymentForm && (
+        <Elements stripe={stripePromise}>
+   
+          <PaymentForm />
+        </Elements>
+      )}
     </>
   );
 };

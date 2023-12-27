@@ -35,6 +35,19 @@ export const dataSlice = createSlice({
     addTotalSeatPrice: (state, { payload }) => {
       state.totalSeatPrice = payload.totalSeatPrice;
     },
+    clearData: (state) => {
+      // Reset the relevant parts of the state to initial values
+      return {
+        ...state,
+        movie: "",
+        cinema: "",
+        room: "",
+        showDate: "",
+        showTime: "",
+        selectedSeat: [],
+        totalSeatPrice: 0,
+      };
+    }
   },
 });
 
@@ -46,7 +59,8 @@ export const {
   addShowDate,
   addShowTime,
   addSelectedSeat,
-  addTotalSeatPrice
+  addTotalSeatPrice,
+  clearData 
 } = dataSlice.actions;
 
 export default dataSlice.reducer;
