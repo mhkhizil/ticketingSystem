@@ -79,11 +79,15 @@ const CheckOut = () => {
               })}
             </td>
           </tr>
+          <tr>
+            <td className=" text-xl text-right">Total Cost:</td>
+            <td className=" text-xl text-center">{data?.totalSeatPrice}MMK</td>
+          </tr>
         </tbody>
       </table>
       <div className=" flex items-center justify-center">
-         <button className=" text-white my-4 text-end btn glass btn-wide bg-red-700">Book Now</button>
-
+         <button className=" text-white my-4  mx-4 text-end btn glass btn-wide bg-red-700">Book Now</button>
+         <button className=" text-white my-4 mx-4 text-end btn glass btn-wide bg-red-700">Buy Now</button>
        </div>
     </>
   );
