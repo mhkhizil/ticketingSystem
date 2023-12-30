@@ -4,10 +4,9 @@ import dataFetching from "../Data/dataFetching";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addSelectedSeat, addTotalSeatPrice } from "../Services/dataSlice";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const SeatChoosing = () => {
- 
   const dispatch = useDispatch();
   const nav = useNavigate();
   const data = useSelector((state) => state.dataReducer);
@@ -134,13 +133,18 @@ const SeatChoosing = () => {
                 totalSeatPrice: totalPrice,
               })
             );
-            if (data?.movie === null) {
+            if (
+              data?.movie === null ||
+              data?.cinema === null ||
+              data?.showTime === null
+            ) {
               let timerInterval;
               Swal.fire({
                 title: "Auto redirect alert!",
-                html: "you will be redirected to home page to choose movie in <b></b> milliseconds.",
+                html: "Data required !you will be redirected to home page to choose data in <b></b> milliseconds.",
                 timer: 3000,
                 timerProgressBar: true,
+                background: "#212730",
                 didOpen: () => {
                   Swal.showLoading();
                   const timer = Swal.getPopup().querySelector("b");
@@ -150,57 +154,11 @@ const SeatChoosing = () => {
                 },
                 willClose: () => {
                   clearInterval(timerInterval);
-                }
-              }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                  nav("/")
-                }
-              });
-            } else if (data?.cinema === null) {
-              let timerInterval;
-              Swal.fire({
-                title: "Auto redirect alert!",
-                html: "you will be redirected to home page to choose cinema in <b></b> milliseconds.",
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: () => {
-                  Swal.showLoading();
-                  const timer = Swal.getPopup().querySelector("b");
-                  timerInterval = setInterval(() => {
-                    timer.textContent = `${Swal.getTimerLeft()}`;
-                  }, 100);
                 },
-                willClose: () => {
-                  clearInterval(timerInterval);
-                }
               }).then((result) => {
                 /* Read more about handling dismissals below */
                 if (result.dismiss === Swal.DismissReason.timer) {
-                  nav("/")
-                }
-              });
-            } else if (data?.showTime === null) {
-              let timerInterval;
-              Swal.fire({
-                title: "Auto redirect alert!",
-                html: "you will be redirected to home page to choose show time in <b></b> milliseconds.",
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: () => {
-                  Swal.showLoading();
-                  const timer = Swal.getPopup().querySelector("b");
-                  timerInterval = setInterval(() => {
-                    timer.textContent = `${Swal.getTimerLeft()}`;
-                  }, 100);
-                },
-                willClose: () => {
-                  clearInterval(timerInterval);
-                }
-              }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                  nav("/")
+                  nav("/");
                 }
               });
             } else {
