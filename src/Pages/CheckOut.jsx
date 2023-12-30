@@ -93,12 +93,12 @@ const CheckOut = () => {
           </tr>
         </tbody>
       </table>
-      <div className=" flex items-center justify-center">
-        <button className=" text-white my-4  mx-4 text-end btn glass btn-wide bg-red-700">
+      <div className=" block sm:flex items-center justify-center">
+        <button className=" w-full text-white my-4  mx-4 text-end btn glass sm:btn-wide bg-red-700">
           Book Now
         </button>
         <button
-          className=" text-white my-4 mx-4 text-end btn glass btn-wide bg-red-700"
+          className=" w-full   text-white my-4 mx-4 text-end btn glass sm:btn-wide bg-red-700"
           onClick={() => setShowPaymentForm(true)}
         >
           Buy Now

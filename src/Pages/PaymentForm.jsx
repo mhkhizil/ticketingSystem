@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch } from "react-redux";
 import { clearData } from "../Services/dataSlice"; // Import the action to clear data
-import Swal from "sweetalert2";
+ import Swal from "sweetalert2";
+import "../css/style.css"
+
 import { useNavigate } from "react-router-dom";
 
 const PaymentForm = () => {
@@ -39,8 +41,12 @@ const PaymentForm = () => {
         icon: "success",
         title: "Success!",
         text: "Your payment was successful. Thank you!",
-        confirmButtonColor: "#28a745",
+       background:"#212730",
+       confirmButtonColor: "#b52a2a" 
+       
+    
       });
+      
       nav("/");
     } catch (err) {
       console.error("Error processing payment:", err);
