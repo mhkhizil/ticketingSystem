@@ -1,4 +1,5 @@
-For live viewing of this web site go to -https://ticketing-system-dc8zpmcoz-mhkhizil.vercel.app/
+For live viewing of this web site go to -ticketing-system-chi.vercel.app
+
 #Tech used 
 -react
 -vite
